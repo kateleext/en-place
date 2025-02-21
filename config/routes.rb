@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  post("/:event_id/:dish_id/get_recipe", controller: "dish", action: "get_recipe")
+
+
+
+
   # Routes for the Task resource:
 
   # CREATE

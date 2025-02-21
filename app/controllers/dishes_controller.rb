@@ -1,4 +1,10 @@
 class DishesController < ApplicationController
+  def get_recipe
+    dish_name = params.fetch("dish_description")
+    
+  end
+
+
   def index
     matching_dishes = Dish.all
 

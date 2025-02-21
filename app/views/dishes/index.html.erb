@@ -1,0 +1,134 @@
+<div>
+  <div>
+    <h1>
+      List of all dishes
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new dish
+    </h2>
+
+    <form action="/insert_dish" method="post">
+      <div>
+        <label for="event_id_box">
+          Event
+        </label>
+
+        <input type="text" id="event_id_box" name="query_event_id">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="query_description">
+      </div>
+
+      <div>
+        <label for="course_box">
+          Course
+        </label>
+
+        <input type="text" id="course_box" name="query_course">
+      </div>
+
+      <div>
+        <label for="recipe_box">
+          Recipe
+        </label>
+
+        <input type="text" id="recipe_box" name="query_recipe">
+      </div>
+
+      <button>
+        Create dish
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Event
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Course
+        </th>
+
+        <th>
+          Recipe
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_dishes.each do |a_dish| %>
+      <tr>
+        <td>
+          <%= a_dish.id %>
+        </td>
+
+        <td>
+          <%= a_dish.event_id %>
+        </td>
+
+        <td>
+          <%= a_dish.description %>
+        </td>
+
+        <td>
+          <%= a_dish.course %>
+        </td>
+
+        <td>
+          <%= a_dish.recipe %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_dish.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_dish.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/dishes/<%= a_dish.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

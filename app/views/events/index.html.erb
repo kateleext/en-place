@@ -1,0 +1,134 @@
+<div>
+  <div>
+    <h1>
+      List of all events
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new event
+    </h2>
+
+    <form action="/insert_event" method="post">
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="event_date_box">
+          Event date
+        </label>
+
+        <input type="date" id="event_date_box" name="query_event_date">
+      </div>
+
+      <div>
+        <label for="guest_count_box">
+          Guest count
+        </label>
+
+        <input type="text" id="guest_count_box" name="query_guest_count">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <textarea id="description_box" name="query_description" rows="3"></textarea>
+      </div>
+
+      <button>
+        Create event
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Event date
+        </th>
+
+        <th>
+          Guest count
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_events.each do |an_event| %>
+      <tr>
+        <td>
+          <%= an_event.id %>
+        </td>
+
+        <td>
+          <%= an_event.user_id %>
+        </td>
+
+        <td>
+          <%= an_event.event_date %>
+        </td>
+
+        <td>
+          <%= an_event.guest_count %>
+        </td>
+
+        <td>
+          <%= an_event.description %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_event.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_event.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/events/<%= an_event.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

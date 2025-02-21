@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all tasks
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new task
+    </h2>
+
+    <form action="/insert_task" method="post">
+      <div>
+        <label for="milestone_id_box">
+          Milestone
+        </label>
+
+        <input type="text" id="milestone_id_box" name="query_milestone_id">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="query_description">
+      </div>
+
+      <button>
+        Create task
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Milestone
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_tasks.each do |a_task| %>
+      <tr>
+        <td>
+          <%= a_task.id %>
+        </td>
+
+        <td>
+          <%= a_task.milestone_id %>
+        </td>
+
+        <td>
+          <%= a_task.description %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_task.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_task.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/tasks/<%= a_task.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

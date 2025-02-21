@@ -1,0 +1,116 @@
+<div>
+  <div>
+    <h1>
+      Event #<%= @the_event.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/events">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_event/<%= @the_event.id %>">
+          Delete event
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_event.user_id %>
+      </dd>
+
+      <dt>
+        Event date
+      </dt>
+      <dd>
+        <%= @the_event.event_date %>
+      </dd>
+
+      <dt>
+        Guest count
+      </dt>
+      <dd>
+        <%= @the_event.guest_count %>
+      </dd>
+
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @the_event.description %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_event.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_event.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit event
+    </h2>
+
+    <form action="/modify_event/<%= @the_event.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_event.user_id %>">
+      </div>
+
+      <div>
+        <label for="event_date_box">
+          Event date
+        </label>
+
+        <input type="date" id="event_date_box" name="query_event_date" value="<%= @the_event.event_date %>">
+      </div>
+
+      <div>
+        <label for="guest_count_box">
+          Guest count
+        </label>
+
+        <input type="text" id="guest_count_box" name="query_guest_count" value="<%= @the_event.guest_count %>">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <textarea id="description_box" name="query_description"><%= @the_event.description %></textarea>
+      </div>
+
+      <button>
+        Update event
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

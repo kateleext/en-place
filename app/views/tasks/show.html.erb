@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Task #<%= @the_task.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/tasks">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_task/<%= @the_task.id %>">
+          Delete task
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Milestone
+      </dt>
+      <dd>
+        <%= @the_task.milestone_id %>
+      </dd>
+
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @the_task.description %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_task.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_task.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit task
+    </h2>
+
+    <form action="/modify_task/<%= @the_task.id %>"  method="post" >
+      <div>
+        <label for="milestone_id_box">
+          Milestone
+        </label>
+
+        <input type="text" id="milestone_id_box" name="query_milestone_id" value="<%= @the_task.milestone_id %>">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="query_description" value="<%= @the_task.description %>">
+      </div>
+
+      <button>
+        Update task
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

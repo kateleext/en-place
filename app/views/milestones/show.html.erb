@@ -1,0 +1,71 @@
+<div>
+  <div>
+    <h1>
+      Milestone #<%= @the_milestone.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/milestones">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_milestone/<%= @the_milestone.id %>">
+          Delete milestone
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Event
+      </dt>
+      <dd>
+        <%= @the_milestone.event_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_milestone.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_milestone.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit milestone
+    </h2>
+
+    <form action="/modify_milestone/<%= @the_milestone.id %>"  method="post" >
+      <div>
+        <label for="event_id_box">
+          Event
+        </label>
+
+        <input type="text" id="event_id_box" name="query_event_id" value="<%= @the_milestone.event_id %>">
+      </div>
+
+      <button>
+        Update milestone
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

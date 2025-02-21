@@ -1,25 +1,20 @@
 class DishesController < ApplicationController
   def get_recipe
     dish_name = params.fetch("dish_description")
-    
+
   end
 
 
   def index
     matching_dishes = Dish.all
-
     @list_of_dishes = matching_dishes.order({ :created_at => :desc })
-
     render({ :template => "dishes/index" })
   end
 
   def show
     the_id = params.fetch("path_id")
-
     matching_dishes = Dish.where({ :id => the_id })
-
     @the_dish = matching_dishes.at(0)
-
     render({ :template => "dishes/show" })
   end
 
@@ -32,9 +27,9 @@ class DishesController < ApplicationController
 
     if the_dish.valid?
       the_dish.save
-      redirect_to("/dishes", { :notice => "Dish created successfully." })
+      redirect_to("/events/#{the_dish.event_id}", { :notice => "Dish created successfully." })
     else
-      redirect_to("/dishes", { :alert => the_dish.errors.full_messages.to_sentence })
+      redirect_to("/events/#{the_dish.event_id}", { :alert => the_dish.errors.full_messages.to_sentence })
     end
   end
 

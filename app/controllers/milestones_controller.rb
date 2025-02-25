@@ -20,6 +20,7 @@ class MilestonesController < ApplicationController
   def create
     the_milestone = Milestone.new
     the_milestone.event_id = params.fetch("query_event_id")
+    the_milestone.name = params.fetch("query_name")
 
     if the_milestone.valid?
       the_milestone.save
@@ -34,6 +35,7 @@ class MilestonesController < ApplicationController
     the_milestone = Milestone.where({ :id => the_id }).at(0)
 
     the_milestone.event_id = params.fetch("query_event_id")
+    the_milestone.name = params.fetch("query_name")
 
     if the_milestone.valid?
       the_milestone.save

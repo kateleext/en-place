@@ -21,6 +21,7 @@ class TasksController < ApplicationController
     the_task = Task.new
     the_task.milestone_id = params.fetch("query_milestone_id")
     the_task.description = params.fetch("query_description")
+    the_task.title = params.fetch("query_title")
 
     if the_task.valid?
       the_task.save
@@ -36,6 +37,7 @@ class TasksController < ApplicationController
 
     the_task.milestone_id = params.fetch("query_milestone_id")
     the_task.description = params.fetch("query_description")
+    the_task.title = params.fetch("query_title")
 
     if the_task.valid?
       the_task.save

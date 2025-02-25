@@ -10,25 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_21_070714) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_25_175427) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "dish_tasks", force: :cascade do |t|
-    t.integer "dish_id"
-    t.integer "task_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "dishes", force: :cascade do |t|
-    t.integer "event_id"
-    t.string "description"
-    t.string "course"
-    t.string "recipe"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "events", force: :cascade do |t|
     t.integer "user_id"
@@ -40,15 +24,51 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_21_070714) do
   end
 
   create_table "ingredients", force: :cascade do |t|
-    t.string "ingredient"
+    t.string "name"
     t.string "quantity"
     t.integer "event_id"
+    t.string "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "recipe_id"
+    t.string "remarks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "milestones", force: :cascade do |t|
     t.integer "event_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recipe_ingredients", force: :cascade do |t|
+    t.integer "recipe_id"
+    t.integer "ingredient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recipe_tasks", force: :cascade do |t|
+    t.integer "recipe_id"
+    t.integer "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.text "description"
+    t.string "reference_url"
+    t.text "ingredients"
+    t.text "steps"
+    t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -56,6 +76,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_21_070714) do
   create_table "tasks", force: :cascade do |t|
     t.integer "milestone_id"
     t.string "description"
+    t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

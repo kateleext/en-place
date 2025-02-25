@@ -19,9 +19,10 @@ class IngredientsController < ApplicationController
 
   def create
     the_ingredient = Ingredient.new
-    the_ingredient.ingredient = params.fetch("query_ingredient")
+    the_ingredient.name = params.fetch("query_name")
     the_ingredient.quantity = params.fetch("query_quantity")
     the_ingredient.event_id = params.fetch("query_event_id")
+    the_ingredient.note = params.fetch("query_note")
 
     if the_ingredient.valid?
       the_ingredient.save
@@ -35,9 +36,10 @@ class IngredientsController < ApplicationController
     the_id = params.fetch("path_id")
     the_ingredient = Ingredient.where({ :id => the_id }).at(0)
 
-    the_ingredient.ingredient = params.fetch("query_ingredient")
+    the_ingredient.name = params.fetch("query_name")
     the_ingredient.quantity = params.fetch("query_quantity")
     the_ingredient.event_id = params.fetch("query_event_id")
+    the_ingredient.note = params.fetch("query_note")
 
     if the_ingredient.valid?
       the_ingredient.save

@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      List of all dish tasks
+      List of all recipe tasks
     </h1>
   </div>
 </div>
@@ -11,16 +11,16 @@
 <div>
   <div>
     <h2>
-      Add a new dish task
+      Add a new recipe task
     </h2>
 
-    <form action="/insert_dish_task" method="post">
+    <form action="/insert_recipe_task" method="post">
       <div>
-        <label for="dish_id_box">
-          Dish
+        <label for="recipe_id_box">
+          Recipe
         </label>
 
-        <input type="text" id="dish_id_box" name="query_dish_id">
+        <input type="text" id="recipe_id_box" name="query_recipe_id">
       </div>
 
       <div>
@@ -32,7 +32,7 @@
       </div>
 
       <button>
-        Create dish task
+        Create recipe task
       </button>
     </form>
   </div>
@@ -48,7 +48,7 @@
         </th>
 
         <th>
-          Dish
+          Recipe
         </th>
 
         <th>
@@ -67,29 +67,29 @@
         </th>
       </tr>
 
-      <% @list_of_dish_tasks.each do |a_dish_task| %>
+      <% @list_of_recipe_tasks.each do |a_recipe_task| %>
       <tr>
         <td>
-          <%= a_dish_task.id %>
+          <%= a_recipe_task.id %>
         </td>
 
         <td>
-          <%= a_dish_task.dish_id %>
+          <%= a_recipe_task.recipe_id %>
         </td>
 
         <td>
-          <%= a_dish_task.task_id %>
+          <%= a_recipe_task.task_id %>
         </td>
 
         <td>
-          <%= time_ago_in_words(a_dish_task.created_at) %> ago
+          <%= time_ago_in_words(a_recipe_task.created_at) %> ago
         </td>
         <td>
-          <%= time_ago_in_words(a_dish_task.updated_at) %> ago
+          <%= time_ago_in_words(a_recipe_task.updated_at) %> ago
         </td>
 
         <td>
-          <a href="/dish_tasks/<%= a_dish_task.id %>">
+          <a href="/recipe_tasks/<%= a_recipe_task.id %>">
             Show details
           </a>
         </td>

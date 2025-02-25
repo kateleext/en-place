@@ -20,10 +20,10 @@
 
     <dl>
       <dt>
-        Ingredient
+        Name
       </dt>
       <dd>
-        <%= @the_ingredient.ingredient %>
+        <%= @the_ingredient.name %>
       </dd>
 
       <dt>
@@ -38,6 +38,13 @@
       </dt>
       <dd>
         <%= @the_ingredient.event_id %>
+      </dd>
+
+      <dt>
+        Note
+      </dt>
+      <dd>
+        <%= @the_ingredient.note %>
       </dd>
 
       <dt>
@@ -68,11 +75,11 @@
 
     <form action="/modify_ingredient/<%= @the_ingredient.id %>"  method="post" >
       <div>
-        <label for="ingredient_box">
-          Ingredient
+        <label for="name_box">
+          Name
         </label>
 
-        <input type="text" id="ingredient_box" name="query_ingredient" value="<%= @the_ingredient.ingredient %>">
+        <input type="text" id="name_box" name="query_name" value="<%= @the_ingredient.name %>">
       </div>
 
       <div>
@@ -89,6 +96,14 @@
         </label>
 
         <input type="text" id="event_id_box" name="query_event_id" value="<%= @the_ingredient.event_id %>">
+      </div>
+
+      <div>
+        <label for="note_box">
+          Note
+        </label>
+
+        <input type="text" id="note_box" name="query_note" value="<%= @the_ingredient.note %>">
       </div>
 
       <button>

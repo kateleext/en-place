@@ -31,6 +31,14 @@
         <input type="text" id="description_box" name="query_description">
       </div>
 
+      <div>
+        <label for="title_box">
+          Title
+        </label>
+
+        <input type="text" id="title_box" name="query_title">
+      </div>
+
       <button>
         Create task
       </button>
@@ -53,6 +61,10 @@
 
         <th>
           Description
+        </th>
+
+        <th>
+          Title
         </th>
 
         <th>
@@ -79,6 +91,10 @@
 
         <td>
           <%= a_task.description %>
+        </td>
+
+        <td>
+          <%= a_task.title %>
         </td>
 
         <td>

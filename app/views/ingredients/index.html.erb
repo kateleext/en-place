@@ -16,11 +16,11 @@
 
     <form action="/insert_ingredient" method="post">
       <div>
-        <label for="ingredient_box">
-          Ingredient
+        <label for="name_box">
+          Name
         </label>
 
-        <input type="text" id="ingredient_box" name="query_ingredient">
+        <input type="text" id="name_box" name="query_name">
       </div>
 
       <div>
@@ -37,6 +37,14 @@
         </label>
 
         <input type="text" id="event_id_box" name="query_event_id">
+      </div>
+
+      <div>
+        <label for="note_box">
+          Note
+        </label>
+
+        <input type="text" id="note_box" name="query_note">
       </div>
 
       <button>
@@ -56,7 +64,7 @@
         </th>
 
         <th>
-          Ingredient
+          Name
         </th>
 
         <th>
@@ -65,6 +73,10 @@
 
         <th>
           Event
+        </th>
+
+        <th>
+          Note
         </th>
 
         <th>
@@ -86,7 +98,7 @@
         </td>
 
         <td>
-          <%= an_ingredient.ingredient %>
+          <%= an_ingredient.name %>
         </td>
 
         <td>
@@ -95,6 +107,10 @@
 
         <td>
           <%= an_ingredient.event_id %>
+        </td>
+
+        <td>
+          <%= an_ingredient.note %>
         </td>
 
         <td>

@@ -23,6 +23,14 @@
         <input type="text" id="event_id_box" name="query_event_id">
       </div>
 
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
       <button>
         Create milestone
       </button>
@@ -41,6 +49,10 @@
 
         <th>
           Event
+        </th>
+
+        <th>
+          Name
         </th>
 
         <th>
@@ -63,6 +75,10 @@
 
         <td>
           <%= a_milestone.event_id %>
+        </td>
+
+        <td>
+          <%= a_milestone.name %>
         </td>
 
         <td>

@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Menu #<%= @the_menu.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/menus">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_menu/<%= @the_menu.id %>">
+          Delete menu
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Event
+      </dt>
+      <dd>
+        <%= @the_menu.event_id %>
+      </dd>
+
+      <dt>
+        Recipe
+      </dt>
+      <dd>
+        <%= @the_menu.recipe_id %>
+      </dd>
+
+      <dt>
+        Remarks
+      </dt>
+      <dd>
+        <%= @the_menu.remarks %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_menu.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_menu.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit menu
+    </h2>
+
+    <form action="/modify_menu/<%= @the_menu.id %>"  method="post" >
+      <div>
+        <label for="event_id_box">
+          Event
+        </label>
+
+        <input type="text" id="event_id_box" name="query_event_id" value="<%= @the_menu.event_id %>">
+      </div>
+
+      <div>
+        <label for="recipe_id_box">
+          Recipe
+        </label>
+
+        <input type="text" id="recipe_id_box" name="query_recipe_id" value="<%= @the_menu.recipe_id %>">
+      </div>
+
+      <div>
+        <label for="remarks_box">
+          Remarks
+        </label>
+
+        <input type="text" id="remarks_box" name="query_remarks" value="<%= @the_menu.remarks %>">
+      </div>
+
+      <button>
+        Update menu
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

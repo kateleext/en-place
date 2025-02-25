@@ -1,0 +1,161 @@
+<div>
+  <div>
+    <h1>
+      Recipe #<%= @the_recipe.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/recipes">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_recipe/<%= @the_recipe.id %>">
+          Delete recipe
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_recipe.user_id %>
+      </dd>
+
+      <dt>
+        Name
+      </dt>
+      <dd>
+        <%= @the_recipe.name %>
+      </dd>
+
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @the_recipe.description %>
+      </dd>
+
+      <dt>
+        Reference url
+      </dt>
+      <dd>
+        <%= @the_recipe.reference_url %>
+      </dd>
+
+      <dt>
+        Ingredients
+      </dt>
+      <dd>
+        <%= @the_recipe.ingredients %>
+      </dd>
+
+      <dt>
+        Steps
+      </dt>
+      <dd>
+        <%= @the_recipe.steps %>
+      </dd>
+
+      <dt>
+        Note
+      </dt>
+      <dd>
+        <%= @the_recipe.note %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_recipe.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_recipe.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit recipe
+    </h2>
+
+    <form action="/modify_recipe/<%= @the_recipe.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_recipe.user_id %>">
+      </div>
+
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name" value="<%= @the_recipe.name %>">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <textarea id="description_box" name="query_description"><%= @the_recipe.description %></textarea>
+      </div>
+
+      <div>
+        <label for="reference_url_box">
+          Reference url
+        </label>
+
+        <input type="text" id="reference_url_box" name="query_reference_url" value="<%= @the_recipe.reference_url %>">
+      </div>
+
+      <div>
+        <label for="ingredients_box">
+          Ingredients
+        </label>
+
+        <textarea id="ingredients_box" name="query_ingredients"><%= @the_recipe.ingredients %></textarea>
+      </div>
+
+      <div>
+        <label for="steps_box">
+          Steps
+        </label>
+
+        <textarea id="steps_box" name="query_steps"><%= @the_recipe.steps %></textarea>
+      </div>
+
+      <div>
+        <label for="note_box">
+          Note
+        </label>
+
+        <textarea id="note_box" name="query_note"><%= @the_recipe.note %></textarea>
+      </div>
+
+      <button>
+        Update recipe
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

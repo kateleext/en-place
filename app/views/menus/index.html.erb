@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      List of all dishes
+      List of all menus
     </h1>
   </div>
 </div>
@@ -11,10 +11,10 @@
 <div>
   <div>
     <h2>
-      Add a new dish
+      Add a new menu
     </h2>
 
-    <form action="/insert_dish" method="post">
+    <form action="/insert_menu" method="post">
       <div>
         <label for="event_id_box">
           Event
@@ -24,31 +24,23 @@
       </div>
 
       <div>
-        <label for="description_box">
-          Description
-        </label>
-
-        <input type="text" id="description_box" name="query_description">
-      </div>
-
-      <div>
-        <label for="course_box">
-          Course
-        </label>
-
-        <input type="text" id="course_box" name="query_course">
-      </div>
-
-      <div>
-        <label for="recipe_box">
+        <label for="recipe_id_box">
           Recipe
         </label>
 
-        <input type="text" id="recipe_box" name="query_recipe">
+        <input type="text" id="recipe_id_box" name="query_recipe_id">
+      </div>
+
+      <div>
+        <label for="remarks_box">
+          Remarks
+        </label>
+
+        <input type="text" id="remarks_box" name="query_remarks">
       </div>
 
       <button>
-        Create dish
+        Create menu
       </button>
     </form>
   </div>
@@ -68,15 +60,11 @@
         </th>
 
         <th>
-          Description
-        </th>
-
-        <th>
-          Course
-        </th>
-
-        <th>
           Recipe
+        </th>
+
+        <th>
+          Remarks
         </th>
 
         <th>
@@ -91,37 +79,33 @@
         </th>
       </tr>
 
-      <% @list_of_dishes.each do |a_dish| %>
+      <% @list_of_menus.each do |a_menu| %>
       <tr>
         <td>
-          <%= a_dish.id %>
+          <%= a_menu.id %>
         </td>
 
         <td>
-          <%= a_dish.event_id %>
+          <%= a_menu.event_id %>
         </td>
 
         <td>
-          <%= a_dish.description %>
+          <%= a_menu.recipe_id %>
         </td>
 
         <td>
-          <%= a_dish.course %>
+          <%= a_menu.remarks %>
         </td>
 
         <td>
-          <%= a_dish.recipe %>
+          <%= time_ago_in_words(a_menu.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_menu.updated_at) %> ago
         </td>
 
         <td>
-          <%= time_ago_in_words(a_dish.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_dish.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/dishes/<%= a_dish.id %>">
+          <a href="/menus/<%= a_menu.id %>">
             Show details
           </a>
         </td>

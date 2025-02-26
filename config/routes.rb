@@ -1,73 +1,42 @@
 Rails.application.routes.draw do
-  # Routes for the Recipe task resource:
-
-  # CREATE
-  post("/insert_recipe_task", { :controller => "recipe_tasks", :action => "create" })
-          
-  # READ
-  get("/recipe_tasks", { :controller => "recipe_tasks", :action => "index" })
-  
-  get("/recipe_tasks/:path_id", { :controller => "recipe_tasks", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_recipe_task/:path_id", { :controller => "recipe_tasks", :action => "update" })
-  
-  # DELETE
-  get("/delete_recipe_task/:path_id", { :controller => "recipe_tasks", :action => "destroy" })
 
   #------------------------------
+  # Routes for the Event resource:
 
-  # Routes for the Recipe ingredient resource:
-
-  # CREATE
-  post("/insert_recipe_ingredient", { :controller => "recipe_ingredients", :action => "create" })
-          
-  # READ
-  get("/recipe_ingredients", { :controller => "recipe_ingredients", :action => "index" })
-  
-  get("/recipe_ingredients/:path_id", { :controller => "recipe_ingredients", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_recipe_ingredient/:path_id", { :controller => "recipe_ingredients", :action => "update" })
-  
-  # DELETE
-  get("/delete_recipe_ingredient/:path_id", { :controller => "recipe_ingredients", :action => "destroy" })
-
-  #------------------------------
-
-  # Routes for the Menu resource:
+  #FORM TO CREATE A NEW EVENT FROM A MENU
+  get("/events/new", controller: "events", action: "form")
 
   # CREATE
-  post("/insert_menu", { :controller => "menus", :action => "create" })
+  post("/create_event", { :controller => "events", :action => "create" })
           
   # READ
-  get("/menus", { :controller => "menus", :action => "index" })
-  
-  get("/menus/:path_id", { :controller => "menus", :action => "show" })
+  get("/events", { :controller => "events", :action => "index" })
+  get("/events/:path_id", { :controller => "events", :action => "show" }) #redirects to event tasks
+    #Review all recipes in an event
+  get("/events/:path_id/recipes", controller: "events", action: "show_recipes")
+  get("/events/:path_id/tasks", controller: "events", action: "show_tasks")
+  get("/events/:path_id/ingredients", controller: "events", action: "show_ingredients")
+
   
   # UPDATE
-  
-  post("/modify_menu/:path_id", { :controller => "menus", :action => "update" })
+  post("/modify_event/:path_id", { :controller => "events", :action => "update" })
   
   # DELETE
-  get("/delete_menu/:path_id", { :controller => "menus", :action => "destroy" })
+  get("/delete_event/:path_id", { :controller => "events", :action => "destroy" })
 
-  #------------------------------
+  # ARCHIVE EVENT
+  post("/events/:path_id/archive", controller: "events", action: "archive")
+ #------------------------------
 
   # Routes for the Recipe resource:
-
-  # CREATE
-  post("/insert_recipe", { :controller => "recipes", :action => "create" })
+  # CREATE NEW RECIPE
+  post("/create_recipe", { :controller => "recipes", :action => "create" })
           
   # READ
   get("/recipes", { :controller => "recipes", :action => "index" })
-  
   get("/recipes/:path_id", { :controller => "recipes", :action => "show" })
-  
+
   # UPDATE
-  
   post("/modify_recipe/:path_id", { :controller => "recipes", :action => "update" })
   
   # DELETE
@@ -79,18 +48,12 @@ Rails.application.routes.draw do
 
   # CREATE
   post("/insert_milestone", { :controller => "milestones", :action => "create" })
-          
-  # READ
-  get("/milestones", { :controller => "milestones", :action => "index" })
-  
-  get("/milestones/:path_id", { :controller => "milestones", :action => "show" })
-  
+   
   # UPDATE
-  
   post("/modify_milestone/:path_id", { :controller => "milestones", :action => "update" })
   
   # DELETE
-  get("/delete_milestone/:path_id", { :controller => "milestones", :action => "destroy" })
+  get("/delete_milestone/:path_id", { :controller => "milestones", :action => "destroy" }) #note: need to implement dependency so its associated tasks are also destroyed
 
   #------------------------------
 
@@ -99,15 +62,10 @@ Rails.application.routes.draw do
   # CREATE
   post("/insert_task", { :controller => "tasks", :action => "create" })
           
-  # READ
-  get("/tasks", { :controller => "tasks", :action => "index" })
-  
-  get("/tasks/:path_id", { :controller => "tasks", :action => "show" })
-  
   # UPDATE
-  
   post("/modify_task/:path_id", { :controller => "tasks", :action => "update" })
-  
+  get("/check_task/:path_id", controller:"tasks", action:"check")
+
   # DELETE
   get("/delete_task/:path_id", { :controller => "tasks", :action => "destroy" })
 
@@ -117,37 +75,12 @@ Rails.application.routes.draw do
 
   # CREATE
   post("/insert_ingredient", { :controller => "ingredients", :action => "create" })
-          
-  # READ
-  get("/ingredients", { :controller => "ingredients", :action => "index" })
-  
-  get("/ingredients/:path_id", { :controller => "ingredients", :action => "show" })
-  
   # UPDATE
-  
   post("/modify_ingredient/:path_id", { :controller => "ingredients", :action => "update" })
+  get("/check_ingredient/:path_id", controller:"ingredients", action:"check")
   
   # DELETE
   get("/delete_ingredient/:path_id", { :controller => "ingredients", :action => "destroy" })
-
-  #------------------------------
-
-  # Routes for the Event resource:
-
-  # CREATE
-  post("/insert_event", { :controller => "events", :action => "create" })
-          
-  # READ
-  get("/events", { :controller => "events", :action => "index" })
-  
-  get("/events/:path_id", { :controller => "events", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_event/:path_id", { :controller => "events", :action => "update" })
-  
-  # DELETE
-  get("/delete_event/:path_id", { :controller => "events", :action => "destroy" })
 
   #------------------------------
 

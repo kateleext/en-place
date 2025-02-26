@@ -27,29 +27,22 @@ class RecipesController < ApplicationController
       \"type\": \"json_schema\",
       \"json_schema\": #{schema}
     }")
-
     request_headers_hash = {
       "Authorization" => "Bearer #{ENV.fetch("OPENAI_API_KEY")}",
       "content-type" => "application/json"
     }
-
     request_body_hash = {
       "model" => "gpt-4o",
       "response_format" => response_format,
       "messages" => messages_array
     }
-
     request_body_json = JSON.generate(request_body_hash)
-
     raw_response = HTTP.headers(request_headers_hash).post(
       "https://api.openai.com/v1/chat/completions",
       :body => request_body_json
     ).to_s
-
     parsed_response = JSON.parse(raw_response)
-
     message_content = parsed_response.dig("choices", 0, "message", "content")
-
     structured_output = JSON.parse(message_content)
     return structured_output
   end
@@ -71,81 +64,81 @@ class RecipesController < ApplicationController
         - in general, the chef should be able to make all decisions based off the task summary and description alone, and never have to refer back to the ingredients list"
     user_prompt = recipe + "The above single-serve recipe needs to be adjusted for #{guest_count} people."
     plan_schema = '{
-  "name": "kitchen_plan",
-  "strict": true,
-  "schema": {
-    "type": "object",
-    "properties": {
-      "shopping_list": {
-        "type": "array",
-        "description": "A list of ingredients required for the recipe.",
-        "items": {
+        "name": "kitchen_plan",
+        "strict": true,
+        "schema": {
           "type": "object",
           "properties": {
-            "item": {
-              "type": "string",
-              "description": "The name of the ingredient."
-            },
-            "quantity": {
-              "type": "string",
-              "description": "The amount required for the ingredient."
-            }
-          },
-          "required": [
-            "item",
-            "quantity"
-          ],
-          "additionalProperties": false
-        }
-      },
-      "milestones": {
-        "type": "array",
-        "description": "A list of milestones in the kitchen plan.",
-        "items": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Description of the milestone"
-            },
-            "tasks": {
+            "shopping_list": {
               "type": "array",
-              "description": "A list of steps detailing the kitchen tasks.",
+              "description": "A list of ingredients required for the recipe.",
               "items": {
                 "type": "object",
                 "properties": {
-                  "task_summary": {
+                  "item": {
                     "type": "string",
-                    "description": "Concise summary of the task"
+                    "description": "The name of the ingredient."
                   },
-                  "details": {
+                  "quantity": {
                     "type": "string",
-                    "description": "Additional reminders and tips for the task"
+                    "description": "The amount required for the ingredient."
                   }
                 },
                 "required": [
-                  "task_summary",
-                  "details"
+                  "item",
+                  "quantity"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "milestones": {
+              "type": "array",
+              "description": "A list of milestones in the kitchen plan.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Description of the milestone"
+                  },
+                  "tasks": {
+                    "type": "array",
+                    "description": "A list of steps detailing the kitchen tasks.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "task_summary": {
+                          "type": "string",
+                          "description": "Concise summary of the task"
+                        },
+                        "details": {
+                          "type": "string",
+                          "description": "Additional reminders and tips for the task"
+                        }
+                      },
+                      "required": [
+                        "task_summary",
+                        "details"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "name",
+                  "tasks"
                 ],
                 "additionalProperties": false
               }
             }
           },
           "required": [
-            "name",
-            "tasks"
+            "shopping_list",
+            "milestones"
           ],
           "additionalProperties": false
         }
-      }
-    },
-    "required": [
-      "shopping_list",
-      "milestones"
-    ],
-    "additionalProperties": false
-  }
-}'
+      }'
     plan = structured_output(system_prompt, user_prompt, plan_schema)
 
     #create event

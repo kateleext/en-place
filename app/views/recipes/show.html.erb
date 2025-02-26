@@ -51,14 +51,14 @@
         Ingredients
       </dt>
       <dd>
-        <%= @the_recipe.ingredients %>
+        <%= @the_recipe.ingredients.gsub(" - ","<br>- ").html_safe %>
       </dd>
 
       <dt>
         Steps
       </dt>
       <dd>
-        <%= @the_recipe.steps %>
+        <%= @the_recipe.steps.gsub(" - ","<br>- ").html_safe %>
       </dd>
 
       <dt>
@@ -84,6 +84,8 @@
     </dl>
   </div>
 </div>
+<hr>
+<form action = "/" method = "post">
 
 <hr>
 

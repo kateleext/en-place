@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  post("/plan_recipe", controller: "recipes", action: "plan")
+  post("/plan_event", controller: "events", action: "plan")
+
   #------------------------------
   # Routes for the Event resource:
 
@@ -11,10 +14,9 @@ Rails.application.routes.draw do
           
   # READ
   get("/events", { :controller => "events", :action => "index" })
-  get("/events/:path_id", { :controller => "events", :action => "show" }) #redirects to event tasks
     #Review all recipes in an event
   get("/events/:path_id/recipes", controller: "events", action: "show_recipes")
-  get("/events/:path_id/tasks", controller: "events", action: "show_tasks")
+  get("/events/tasks/:path_id", controller: "events", action: "show_tasks")
   get("/events/:path_id/ingredients", controller: "events", action: "show_ingredients")
 
   

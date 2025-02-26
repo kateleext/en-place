@@ -49,7 +49,8 @@ class RecipesController < ApplicationController
 
   def plan
     guest_count = params.fetch("guest_count")
-    recipe = Recipe.all.where(:id => params.fetch("recipe_id"))
+    recipe = Recipe.all.where(:id => params.fetch("recipe_id")).first
+    recipe = recipe.name + recipe.description + recipe.ingredients + recipe.steps
     system_prompt = "You are a thoughtful, proactive and detail-oriented home kitchen manager planning for busy night serving guests. Your objective is to help the chef get through the night with calm and confidence. Given one or more recipes in structured format + how many people we need to serve these dish(es) to tonight, please plan the following:
 
         1. A unified shopping list, combining from multiple recipes that use the same ingredients. Keep in mind that recipe quantities in the original recipe are meant for single serving. 
@@ -139,38 +140,42 @@ class RecipesController < ApplicationController
           "additionalProperties": false
         }
       }'
-    plan = structured_output(system_prompt, user_prompt, plan_schema)
 
     #create event
-    event = Event.new
-    event.event_date = Date.today
-    event.guest_count = guest_count
-    event.save
+    the_event = Event.new
+    the_event.user_id = current_user.id
+    the_event.event_date = Date.today
+    the_event.guest_count = guest_count
+    the_event.save
+
+    #generate plan
+    plan = structured_output(system_prompt, user_prompt, plan_schema)
+    puts plan
 
     #save milestones
-    for milestone in plan.milestones
+    for milestone in plan.fetch("milestones")
       new_milestone = Milestone.new
-      new_milestone.event_id = event.id
-      new_milestone.name = milestone.name
+      new_milestone.event_id = the_event.id
+      new_milestone.name = milestone.fetch("name")
       new_milestone.save
-      for task in milestone.tasks
+      for task in milestone.fetch("tasks")
         new_task = Task.new
         new_task.milestone_id = new_milestone.id
-        new_task.title = task.task_summary
-        new_task.description = task.details
+        new_task.title = task.fetch("task_summary")
+        new_task.description = task.fetch("details")
         new_task.save
       end
     end
     #save ingredients
-    for ingredient in plan.shopping_list
+    for ingredient in plan.fetch("shopping_list")
       new_ingredient = Ingredient.new
-      new_ingredient.name = ingredient.item
-      new_ingredient.quantity = ingredient.quantity
-      new_ingredient.event_id = event.id
+      new_ingredient.name = ingredient.fetch("item")
+      new_ingredient.quantity = ingredient.fetch("quantity")
+      new_ingredient.event_id = the_event.id
       new_ingredient.save
     end
 
-    redirect("events/#{:event.id}/tasks")
+    redirect_to("/events/tasks/#{the_event.id}")
   end
 
   def generate(recipe)

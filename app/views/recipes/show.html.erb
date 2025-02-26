@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      Recipe #<%= @the_recipe.id %> details
+      <%= @the_recipe.name %>
     </h1>
 
     <div>
@@ -17,79 +17,13 @@
         </a>
       </div>
     </div>
-
-    <dl>
-      <dt>
-        User
-      </dt>
-      <dd>
-        <%= @the_recipe.user_id %>
-      </dd>
-
-      <dt>
-        Name
-      </dt>
-      <dd>
-        <%= @the_recipe.name %>
-      </dd>
-
-      <dt>
-        Description
-      </dt>
-      <dd>
-        <%= @the_recipe.description %>
-      </dd>
-
-      <dt>
-        Reference url
-      </dt>
-      <dd>
-        <%= @the_recipe.reference_url %>
-      </dd>
-
-      <dt>
-        Ingredients
-      </dt>
-      <dd>
-        <%= @the_recipe.ingredients.gsub(" - ","<br>- ").html_safe %>
-      </dd>
-
-      <dt>
-        Steps
-      </dt>
-      <dd>
-        <%= @the_recipe.steps.gsub(" - ","<br>- ").html_safe %>
-      </dd>
-
-      <dt>
-        Note
-      </dt>
-      <dd>
-        <%= @the_recipe.note %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_recipe.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_recipe.updated_at) %> ago
-      </dd>
-    </dl>
-  </div>
 </div>
 <hr>
 <h3>Make this Today</h3>
-<form action = "/" method = "post">
-<label for="guest_count">Cooking for:</label>
-<input id="guest_count" name="guest_count">
-<input type="hidden" name="event_id" >
+  <form action = "/plan_recipe" method = "post">
+  <label for="guest_count">Cooking for:</label>
+  <input id="guest_count" name="guest_count">
+  <input type="hidden" name="recipe_id" id="recipe_id" value=<%=@the_recipe.id%>>
 <button>Generate a Plan</button>
 <hr>
 
@@ -97,14 +31,14 @@
 <div>
   <div>
     <h2>
-      Edit recipe
+      Review Recipe
     </h2>
 
     <form action="/modify_recipe/<%= @the_recipe.id %>"  method="post" >
       <div>
         <label for="user_id_box">
           User
-        </label>
+        </label><br>
 
         <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_recipe.user_id %>">
       </div>
@@ -112,7 +46,7 @@
       <div>
         <label for="name_box">
           Name
-        </label>
+        </label><br>
 
         <input type="text" id="name_box" name="query_name" value="<%= @the_recipe.name %>">
       </div>
@@ -120,7 +54,7 @@
       <div>
         <label for="description_box">
           Description
-        </label>
+        </label><br>
 
         <textarea id="description_box" name="query_description"><%= @the_recipe.description %></textarea>
       </div>
@@ -128,7 +62,7 @@
       <div>
         <label for="reference_url_box">
           Reference url
-        </label>
+        </label><br>
 
         <input type="text" id="reference_url_box" name="query_reference_url" value="<%= @the_recipe.reference_url %>">
       </div>
@@ -136,7 +70,7 @@
       <div>
         <label for="ingredients_box">
           Ingredients
-        </label>
+        </label><br>
 
         <textarea id="ingredients_box" name="query_ingredients"><%= @the_recipe.ingredients %></textarea>
       </div>
@@ -144,7 +78,7 @@
       <div>
         <label for="steps_box">
           Steps
-        </label>
+        </label><br>
 
         <textarea id="steps_box" name="query_steps"><%= @the_recipe.steps %></textarea>
       </div>
@@ -152,13 +86,13 @@
       <div>
         <label for="note_box">
           Note
-        </label>
+        </label><br>
 
         <textarea id="note_box" name="query_note"><%= @the_recipe.note %></textarea>
       </div>
 
       <button>
-        Update recipe
+        Save Changes
       </button>
     </form>
   </div>

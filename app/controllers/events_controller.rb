@@ -8,11 +8,10 @@ class EventsController < ApplicationController
   end
 
   def show
-    render({ :template => "events/show" })
   end
 
   def show_tasks
-    @the_event = Events.all.first.where({:id => params.fetch("path_id")})
+    @the_event = Event.all.where({:id => params.fetch("path_id")}).first
     render(template: "events/show_tasks")
   end
 

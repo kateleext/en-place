@@ -1,1 +1,19 @@
-<h1>@the_event.name</h1>
+<h1><%=@the_event.id%></h1>
+
+<h2>Shopping List</h2>
+<ul>
+<%for ingredient in @the_event.shopping_list%>
+  <li> <%=ingredient.quantity%> of <%=ingredient.name%>
+<%end%>
+</ul>
+
+<h2>Task List</h2>
+<%for milestone in @the_event.milestones%>
+  <h3> <%=milestone.name%> </h3>
+  <ul>
+    <%for task in milestone.tasks%>
+      <li> <b><%=task.title%></b><br>
+            <%=task.description%>
+    <%end%>
+  </ul>
+<%end%>

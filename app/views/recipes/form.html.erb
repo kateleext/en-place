@@ -1,0 +1,19 @@
+<form action="/create_recipe" method="post">
+<h1>Draft a Recipe</h1>
+<p>Describe a dish in as much detail as possible - and I will draft a recipe for you!</p>
+  <div>
+    <label for="name">Name the dish:</label>
+    <input id="name" name="query_name">
+  </div>
+
+  <div>
+    <label for="description">Describe it:</label>
+    <textarea id="description" name="query_description" type="text-area"></textarea>
+  </div>
+
+  <div>
+    <label for="reference_url">Reference URL:</label>
+    <input id="reference_url" name="query_reference_url">
+  </div>
+  <button>Draft Recipe</button>
+</form>

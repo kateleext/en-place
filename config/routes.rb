@@ -29,6 +29,7 @@ Rails.application.routes.draw do
  #------------------------------
 
   # Routes for the Recipe resource:
+  get("/recipes/new", controller: "recipes", action:"form")
   # CREATE NEW RECIPE
   post("/create_recipe", { :controller => "recipes", :action => "create" })
           
@@ -83,7 +84,6 @@ Rails.application.routes.draw do
   get("/delete_ingredient/:path_id", { :controller => "ingredients", :action => "destroy" })
 
   #------------------------------
-
   devise_for :users
   
 end

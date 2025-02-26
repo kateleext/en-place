@@ -1,24 +1,24 @@
 <form action="/create_recipe" method="post">
 <h1>Draft a Recipe</h1>
 <p>Describe a dish in as much detail as possible - and I will draft a recipe for you!</p>
-  <div>
+  <div class="form-field">
     <label for="name">Name the dish:</label>
-    <input id="name" name="query_name">
+    <input id="name" name="query_name" class="field-content">
   </div>
 
-  <div>
+  <div class="form-textarea">
     <label for="description">Describe it:</label>
-    <textarea id="description" name="query_description" type="text-area"></textarea>
+    <textarea id="description" name="query_description" type="text-area" class="field-content"></textarea>
   </div>
 
-  <div>
+  <div class="form-field">
     <label for="reference_url">Reference URL:</label>
-    <input id="reference_url" name="query_reference_url">
+    <input id="reference_url" name="query_reference_url" class="field-content">
   </div>
 
-  <div>
+  <div class="form-field">
     <label for="note">Note:</label>
-    <input id="note" name="query_note">
+    <input id="note" name="query_note" class="field-content">
   </div>
   <button>Draft Recipe</button>
 </form>
